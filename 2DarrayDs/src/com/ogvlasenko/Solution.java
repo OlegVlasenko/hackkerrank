@@ -1,18 +1,32 @@
 package com.ogvlasenko;
-import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+import static java.lang.Math.max;
+
 
 public class Solution {
 
     // Complete the hourglassSum function below.
     static int hourglassSum(int[][] arr) {
+        int max_sum_hourglass = -63;
+        int sum_hourglass = 0;
 
-        return 1;
+        int rows = arr.length;
+        int cols = arr[0].length;
+        for (int i = 0; i < cols - 2; i++) {
+            for (int j =0; j < rows - 2; j++) {
+                sum_hourglass = arr[i][j] + arr[i][j + 1] + arr[i][j + 2]
+                        + arr[i + 1][j + 1]
+                        + arr[i + 2][j] + arr[i + 2][j + 1] + arr[i + 2][j + 2];
+                max_sum_hourglass = max(max_sum_hourglass, sum_hourglass);
+            }
+        }
+
+        return max_sum_hourglass;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -40,5 +54,7 @@ public class Solution {
         bufferedWriter.close();
 
         scanner.close();
+
+        System.out.println(result);
     }
 }
